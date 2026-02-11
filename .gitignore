@@ -2,9 +2,9 @@
 /utils/__pycache__
 /__pycache__
 /data
-!data/math/
-!data/gsm8k/
-!data/ecqa/
-!data/gpqa_diamond/
-!data/gpqa_experts/
-!data/gpqa_extended/
+!/data/math/
+!/data/gsm8k/
+!/data/ecqa/
+!/data/gpqa_diamond/
+!/data/gpqa_experts/
+!/data/gpqa_extended/
