@@ -5,7 +5,6 @@ from utils.load_data import format_prompt, extract_answer, load_prompt
 from utils.mcts_utils import reach_terminal_ost_step
 import torch 
 
-count = 0
 
 class BeamNode(object):
     def __init__(
@@ -77,9 +76,7 @@ def generate_ost_step(node, model, sample_cnt, remain, args):
             input=inputs, max_tokens=256, sample_cnt=sample_cnt, stop_tokens=['.\n', '\nStep'], continue_generate=True, temperature=args.temperature
         )
         ost_step_list = [io_output.split('\nStep')[0].strip() for io_output in io_output_list]
-    global count 
-    for response in io_output_list:
-        count += len(response)
+
     answer_list = []
     for ost_step in ost_step_list:
         if reach_terminal_ost_step(ost_step):
@@ -164,6 +161,5 @@ def beam_search(args, model, reward, question):
     for i in range(len(answers)):
         if not answers[i]:
             answers[i] = extract_answer(responses[i]['content'], args.dataset)
-    global count
-    traces['count'] = count
+
     return responses, answers, traces

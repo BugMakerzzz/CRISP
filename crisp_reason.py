@@ -3,10 +3,8 @@ from utils.mcts_utils import reach_terminal_ost_step
 import numpy as np
 from typing import List, Dict, Tuple
 from collections import defaultdict
-from collections import Counter
 
 node_cnt = 0
-count = 0
 class Generator:
     """Generator generates children nodes"""
 
@@ -79,9 +77,7 @@ class Generator:
                 temperature=self.temperature
             )
         responses = [output.strip() for output in output_list]
-        global count 
-        for res in responses:
-            count += len(res)
+
         scores = self.reward.score(question=question, responses=responses, agg='last', step_reward=False)
         answers = [extract_answer(content, self.dataset) for content in responses]
         return responses, scores, answers
@@ -281,6 +277,5 @@ def crisp_reason(model, reward, question, args):
     responses = [node.content for node in searcher.nodes]
     answers = [node.answer for node in searcher.nodes]
     traces = print_tree_from_root(searcher=searcher)
-    global count
-    traces['count'] = count
+
     return responses, answers, pred, traces

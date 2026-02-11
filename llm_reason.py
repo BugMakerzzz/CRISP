@@ -14,7 +14,6 @@ from beam_search import beam_search
 from crisp_reason import crisp_reason
 import time
 
-count = 0
 def beam_reason(args, item, model, reward):
     responses, answer, traces = beam_search(args=args, model=model, reward=reward, question=item['question'])
     # pred = max(answer, key=answer.count)
@@ -77,12 +76,10 @@ def sc_reason(dataset, model, inputs, nums, temperature):
         response = model.generate(inputs, sample_cnt=nums, max_tokens=5000, temperature=temperature)
     else:
         response = model.generate(inputs, sample_cnt=nums, temperature=temperature)
-    global count
-    for res in response:
-        count += len(res)
+
     answer = [extract_answer(output=res, dataset=dataset) for res in response]
     pred = max(answer, key=answer.count)
-    trace = {'count':count}
+
     return response, answer, pred, trace
 
 def bestn_reason(dataset, model, inputs, reward_model, nums=10):
@@ -95,14 +92,12 @@ def bestn_reason(dataset, model, inputs, reward_model, nums=10):
     else:
         question = inputs[-1]['content']
         response = model.generate(inputs, sample_cnt=nums)
-    global count
-    for res in response:
-        count += len(res)
+
     scores = reward_model.score(question, response, step_reward=False, agg=agg)
     answer = [extract_answer(output=res, dataset=dataset) for res in response]
     pred = answer[np.argmax(np.array(scores))]
     response = [{'content': response[i], 'score':float(scores[i])} for i in range(nums)]
-    trace = {'count':count}
+
     return response, answer, pred, trace  
 
     
