@@ -5,7 +5,7 @@ Official implementation of **CRISP**, an inference-time reasoning algorithm for 
 > **Fixing the Broken Compass: Diagnosing and Improving Inference-Time Reward Modeling**
 > *ICLR 2026 paper*
 
-**Paper:** https://openreview.net/pdf?id=hsBBYOqph2
+**Paper:** https://arxiv.org/abs/2503.05188
 
 
 
@@ -173,10 +173,13 @@ crisp
 # 📄 Citation
 
 ```
-@article{crisp2026,
-  title={Fixing the Broken Compass: Diagnosing and Improving Inference-Time Reward Modeling},
-  author={Anonymous},
-  journal={ICLR 2026},
-  year={2026}
+@misc{li2026fixingbrokencompassdiagnosing,
+      title={Fixing the Broken Compass: Diagnosing and Improving Inference-Time Reward Modeling}, 
+      author={Jiachun Li and Pengfei Cao and Zhuoran Jin and Yubo Chen and Jiexin Xu and Huaijun Li and Xiaojian Jiang and Kang Liu and Jun Zhao},
+      year={2026},
+      eprint={2503.05188},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2503.05188}, 
 }
 ```
